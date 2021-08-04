@@ -2,14 +2,23 @@ import { BaseComponent } from '../../component.js';
 export class VideoComponent extends BaseComponent {
     constructor(title, url) {
         super(`<section class= "video">
-        <div class="video__holder">
-            <video src="" class="video__thumbnail"></video>
+        <div class="video__player">
+            <iframe class="video__iframe"></iframe>
         </div>
-        <p class="video__title"></p>
+        <h3 class="video__title"></h3>
     </section>`);
-        const videoElement = this.element.querySelector(`.video__thumbnail`);
-        videoElement.src = url;
+        const iframe = this.element.querySelector(`.video__iframe`);
+        iframe.src = this.converToEmbededURL(url);
         const videotitle = this.element.querySelector('.video__title');
         videotitle.textContent = title;
+    }
+    converToEmbededURL(url) {
+        const regExp = /(?:https?:\/\/)?(?:www\.)?(?:(?:youtu\.?be\/?)(?:\.com\/)?(?:watch\?v\=)?(?:embed)?)([a-zA-Z0-9]{11})/;
+        const match = url.match(regExp);
+        const videoId = match ? match[1] || match[2] : undefined;
+        if (videoId) {
+            return `https://www.youtube.com/embed/${videoId}`;
+        }
+        return url;
     }
 }
