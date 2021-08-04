@@ -11,10 +11,10 @@ class App {
         const video = new VideoComponent('video title', 'https://www.youtube.com/watch?v=yiwCykXaqv0');
         const todo = new TodoComponent('todo-title이지롱', 'todo');
         const note = new NoteComponent('note-title', '바디지롱');
-        image.attachTo(appRoot, 'beforeend');
-        video.attachTo(appRoot, 'beforeend');
-        note.attachTo(appRoot, 'beforeend');
-        todo.attachTo(appRoot, 'beforeend');
+        this.page.addChild(image);
+        this.page.addChild(video);
+        this.page.addChild(note);
+        this.page.addChild(todo);
     }
 }
 new App(document.querySelector('.document'));

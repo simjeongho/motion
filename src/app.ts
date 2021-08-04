@@ -1,11 +1,12 @@
+import { Component } from './components/component';
 import { ImageComponent } from './components/page/item/image.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { TodoComponent } from './components/page/item/todo.js';
 import { VideoComponent } from './components/page/item/video.js';
-import { PageComponent } from './components/page/page.js';
+import { PageComponent, Composble } from './components/page/page.js';
 
 class App {
-    private readonly page: PageComponent;
+    private readonly page: Component & Composble;
     constructor(appRoot: HTMLElement) {
         this.page = new PageComponent();
         this.page.attachTo(appRoot);
@@ -15,11 +16,11 @@ class App {
         const todo = new TodoComponent('todo-title이지롱', 'todo');
         const note = new NoteComponent('note-title', '바디지롱');
 
-        image.attachTo(appRoot, 'beforeend');
-        video.attachTo(appRoot, 'beforeend');
+        this.page.addChild(image);
+        this.page.addChild(video);
 
-        note.attachTo(appRoot, 'beforeend');
-        todo.attachTo(appRoot, 'beforeend');
+        this.page.addChild(note);
+        this.page.addChild(todo);
     }
 }
 
