@@ -3,6 +3,7 @@
 
 export interface Component {
     attachTo(parent: HTMLElement, position?: InsertPosition): void;
+    removeFrom(parent: HTMLElement): void;
 }
 export class BaseComponent<T extends HTMLElement> implements Component {
     protected readonly element: T;
@@ -13,5 +14,12 @@ export class BaseComponent<T extends HTMLElement> implements Component {
     }
     attachTo(parent: HTMLElement, position: InsertPosition = 'afterbegin') {
         parent.insertAdjacentElement(position, this.element);
+    }
+
+    removeFrom(parent: HTMLElement): void {
+        if (parent !== this.element.parentElement) {
+            throw new Error('parent mismatch');
+        }
+        parent.removeChild(this.element);
     }
 }
