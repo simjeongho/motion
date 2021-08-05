@@ -10,7 +10,7 @@ export class InputDialog extends BaseComponent<HTMLElement> implements Composble
         super(`<dialog class="dialog">
                     <div class= "dialog__container">
                     <button class="close">&times;</button>
-                    <div class="dialog__body"></div>
+                    <div id="dialog__body"></div>
                     <button class="dialog__summit">ADD</button>
                     </div>
             </dialog>`);
